@@ -7,12 +7,15 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.groupupv2.HomePage.NavigationDrawerActivity;
+import com.example.groupupv2.HomePage.NotificationMaker;
 import com.example.groupupv2.HomePage.User;
+import com.example.groupupv2.Interfaces.CustomNotification;
 import com.example.groupupv2.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         LoginTV = findViewById(R.id.Main_LoginTV);
         emailET = findViewById(R.id.Main_EmailET);
         nameET = findViewById(R.id.Main_NamelET);
@@ -60,31 +64,29 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-      signUpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String email = emailET.getText().toString();
-                final String name = nameET.getText().toString();
-                final String username = usernameET.getText().toString();
-                final String password = passwordET.getText().toString();
+      signUpBtn.setOnClickListener(view -> {
+          Log.i("SignUp", "SignUp button pressed");
+          final String email = emailET.getText().toString();
+          final String name = nameET.getText().toString();
+          final String username = usernameET.getText().toString();
+          final String password = passwordET.getText().toString();
 
-                if (emptyAuthFields(email, name, username, password) == false) {
-                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(MainActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                                writeNewUser(username, name, email);
-                                startActivity(new Intent(MainActivity.this, NavigationDrawerActivity.class));
-                            } else {
-                                FirebaseAuthException e = (FirebaseAuthException) task.getException();
-                                Toast.makeText(MainActivity.this, "Registration failed because " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
-            }
-        });
+          if (emptyAuthFields(email, name, username, password) == false) {
+              firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                  @Override
+                  public void onComplete(@NonNull Task<AuthResult> task) {
+                      if (task.isSuccessful()) {
+                          Toast.makeText(MainActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                          writeNewUser(username, name, email);
+                          startActivity(new Intent(MainActivity.this, NavigationDrawerActivity.class));
+                      } else {
+                          FirebaseAuthException e = (FirebaseAuthException) task.getException();
+                          Toast.makeText(MainActivity.this, "Registration failed because " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                      }
+                  }
+              });
+          }
+      });
     }
 
     @Override
@@ -124,5 +126,6 @@ public class MainActivity extends AppCompatActivity {
 
         User user = new User(email, name, username);
         mDatabase.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
+        Log.i("SIngUp", "New User added");
     }
 }

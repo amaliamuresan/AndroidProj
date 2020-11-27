@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -107,7 +108,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                Log.e("Fragment", "Error setting fragment"  + HomeFragment.class.getName());
             }
         }
         if(menuItem.getItemId() == R.id.menu_profile)
@@ -117,7 +118,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                Log.e("Fragment", "Error setting fragment"  + ProfileFragment.class.getName());
             }
         }
 
