@@ -1,4 +1,4 @@
-package com.example.groupupv2.Registration;
+package com.example.groupupv2.registration;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,10 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.example.groupupv2.HomePage.NavigationDrawerActivity;
-import com.example.groupupv2.HomePage.NotificationMaker;
-import com.example.groupupv2.HomePage.User;
-import com.example.groupupv2.Interfaces.CustomNotification;
+import com.example.groupupv2.homepage.NavigationDrawerActivity;
+import com.example.groupupv2.homepage.User;
 import com.example.groupupv2.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -44,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         LoginTV = findViewById(R.id.Main_LoginTV);
         emailET = findViewById(R.id.Main_EmailET);
         nameET = findViewById(R.id.Main_NamelET);
@@ -71,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
           final String username = usernameET.getText().toString();
           final String password = passwordET.getText().toString();
 
-          if (emptyAuthFields(email, name, username, password) == false) {
+          if (!emptyAuthFields(email, name, username, password)) {
               firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                   @Override
                   public void onComplete(@NonNull Task<AuthResult> task) {

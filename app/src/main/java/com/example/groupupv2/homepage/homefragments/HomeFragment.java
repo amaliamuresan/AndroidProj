@@ -1,4 +1,4 @@
-package com.example.groupupv2.HomePage.HomeFragments;
+package com.example.groupupv2.homepage.homefragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.groupupv2.HomePage.Post;
-import com.example.groupupv2.HomePage.PostAdapter;
+import com.example.groupupv2.homepage.Post;
+import com.example.groupupv2.homepage.PostAdapter;
 import com.example.groupupv2.R;
 
 import java.util.ArrayList;

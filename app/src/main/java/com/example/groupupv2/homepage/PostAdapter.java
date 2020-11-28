@@ -1,4 +1,4 @@
-package com.example.groupupv2.HomePage;
+package com.example.groupupv2.homepage;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.groupupv2.R;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {

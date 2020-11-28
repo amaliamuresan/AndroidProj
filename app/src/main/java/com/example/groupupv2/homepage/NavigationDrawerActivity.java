@@ -1,7 +1,8 @@
-package com.example.groupupv2.HomePage;
+package com.example.groupupv2.homepage;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,9 +14,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.groupupv2.HomePage.HomeFragments.HomeFragment;
-import com.example.groupupv2.HomePage.HomeFragments.ProfileFragment;
+import com.example.groupupv2.homepage.homefragments.HomeFragment;
+import com.example.groupupv2.homepage.homefragments.ProfileFragment;
 import com.example.groupupv2.R;
+import com.example.groupupv2.databinding.NavigationViewBinding;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -49,7 +51,11 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.navigation_view);
+        //setContentView(R.layout.navigation_view);
+        NavigationDrawerViewModel viewModel = new NavigationDrawerViewModel();
+
+        NavigationViewBinding binding = DataBindingUtil.setContentView(this, R.layout.navigation_view);
+        binding.setNavigationDrawerViewModel(viewModel);
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
         mAuth = FirebaseAuth.getInstance();

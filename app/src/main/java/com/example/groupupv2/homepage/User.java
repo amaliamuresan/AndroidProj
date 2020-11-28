@@ -1,4 +1,4 @@
-package com.example.groupupv2.HomePage;
+package com.example.groupupv2.homepage;
 
 import java.util.ArrayList;
 

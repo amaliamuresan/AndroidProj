@@ -1,17 +1,14 @@
-package com.example.groupupv2.HomePage;
+package com.example.groupupv2.homepage;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-
-import com.example.groupupv2.Interfaces.CustomNotification;
+import com.example.groupupv2.interfaces.CustomNotification;
 import com.example.groupupv2.R;
-import com.example.groupupv2.Registration.LoginActivity;
 
 public class NotificationMaker implements CustomNotification {
     public static String CHANNEL_ID = "Chanel1";
@@ -21,8 +18,8 @@ public class NotificationMaker implements CustomNotification {
 
     public void createNotification(Context context, String title, String text)
     {
-        createChannel(context);
-        Intent intent = new Intent(context, context.getClass());// just for login for now
+        //createChannel(context);
+        Intent intent = new Intent(context, context.getClass());
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.add)
@@ -41,7 +38,5 @@ public class NotificationMaker implements CustomNotification {
         channel.setDescription("This is chanel1");
         NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(channel);
-
-
     }
 }

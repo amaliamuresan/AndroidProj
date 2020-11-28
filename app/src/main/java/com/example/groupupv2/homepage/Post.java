@@ -1,9 +1,4 @@
-package com.example.groupupv2.HomePage;
-
-import android.media.Image;
-import android.widget.ImageView;
-
-import java.text.DateFormat;
+package com.example.groupupv2.homepage;
 
 public class Post {
     private String autorName;
