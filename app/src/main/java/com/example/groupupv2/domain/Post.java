@@ -1,26 +1,26 @@
-package com.example.groupupv2.homepage;
+package com.example.groupupv2.domain;
 
 public class Post {
-    private String autorName;
+    private String autorID;
     private int image;
     private String data;
     private String description;
     private String domain;
 
-    public Post(String autorName, int image, String data, String description, String domain) {
-        this.autorName = autorName;
+    public Post(String autorID, int image, String data, String description, String domain) {
+        this.autorID = autorID;
         this.image = image;
         this.data = data;
         this.description = description;
         this.domain = domain;
     }
 
-    public String getAutorName() {
-        return autorName;
+    public String getAutorID() {
+        return autorID;
     }
 
-    public void setAutorName(String autorName) {
-        this.autorName = autorName;
+    public void setAutorID(String autorID) {
+        this.autorID = autorID;
     }
 
     public int getImage() {

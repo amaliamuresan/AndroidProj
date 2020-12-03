@@ -1,4 +1,4 @@
-package com.example.groupupv2.registration;
+package com.example.groupupv2.presentation.registration;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -9,9 +9,9 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.example.groupupv2.homepage.NavigationDrawerActivity;
-import com.example.groupupv2.homepage.NotificationMaker;
-import com.example.groupupv2.interfaces.CustomNotification;
+import com.example.groupupv2.presentation.NavigationDrawerActivity;
+import com.example.groupupv2.presentation.NotificationMaker;
+import com.example.groupupv2.interfaces.NotificationInterface;
 import com.example.groupupv2.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText passwordET;
     EditText emailET;
     Button loginBtn;
-    CustomNotification notificationMaker;
+    NotificationInterface notificationMaker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

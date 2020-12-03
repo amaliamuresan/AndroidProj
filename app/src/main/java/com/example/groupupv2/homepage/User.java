@@ -1,5 +1,7 @@
 package com.example.groupupv2.homepage;
 
+import com.example.groupupv2.domain.Post;
+
 import java.util.ArrayList;
 
 public class User {

@@ -1,6 +1,5 @@
-package com.example.groupupv2.registration;
+package com.example.groupupv2.presentation.registration;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,19 +11,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.example.groupupv2.homepage.NavigationDrawerActivity;
+import com.example.groupupv2.presentation.NavigationDrawerActivity;
 import com.example.groupupv2.homepage.User;
 import com.example.groupupv2.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
@@ -56,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         LoginTV.setOnClickListener((View view) -> {
 
-                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                Intent i = new Intent(SignUpActivity.this, LoginActivity.class);
                 startActivity(i);
 
         });
@@ -69,17 +65,14 @@ public class MainActivity extends AppCompatActivity {
           final String password = passwordET.getText().toString();
 
           if (!emptyAuthFields(email, name, username, password)) {
-              firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                  @Override
-                  public void onComplete(@NonNull Task<AuthResult> task) {
-                      if (task.isSuccessful()) {
-                          Toast.makeText(MainActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                          writeNewUser(username, name, email);
-                          startActivity(new Intent(MainActivity.this, NavigationDrawerActivity.class));
-                      } else {
-                          FirebaseAuthException e = (FirebaseAuthException) task.getException();
-                          Toast.makeText(MainActivity.this, "Registration failed because " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                      }
+              firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                  if (task.isSuccessful()) {
+                      Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                      writeNewUser(username, name, email);
+                      startActivity(new Intent(SignUpActivity.this, NavigationDrawerActivity.class));
+                  } else {
+                      FirebaseAuthException e = (FirebaseAuthException) task.getException();
+                      Toast.makeText(SignUpActivity.this, "Registration failed because " + e.getMessage(), Toast.LENGTH_SHORT).show();
                   }
               });
           }
@@ -123,6 +116,6 @@ public class MainActivity extends AppCompatActivity {
 
         User user = new User(email, name, username);
         mDatabase.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
-        Log.i("SIngUp", "New User added");
+        Log.i("SignUp", "New User added");
     }
 }

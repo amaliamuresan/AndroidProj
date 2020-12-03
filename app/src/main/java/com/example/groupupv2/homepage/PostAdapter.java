@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.groupupv2.R;
+import com.example.groupupv2.domain.Post;
 
 import java.util.ArrayList;
 
@@ -52,7 +53,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.itemView.setTag(posts.get(position));
         holder.tvDate.setText((CharSequence) posts.get(position).getData());
-        holder.tvAuthorName.setText(posts.get(position).getAutorName());
+        holder.tvAuthorName.setText(posts.get(position).getAutorID());
         holder.ivProfilePic.setImageResource(R.drawable.user_ic);
         holder.tvDescription.setText(posts.get(position).getDescription());
 

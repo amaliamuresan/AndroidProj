@@ -1,4 +1,4 @@
-package com.example.groupupv2.homepage;
+package com.example.groupupv2.presentation;
 
 import android.content.Context;
 import android.widget.Toast;

@@ -1,4 +1,4 @@
-package com.example.groupupv2.homepage;
+package com.example.groupupv2.presentation;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -7,10 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import com.example.groupupv2.interfaces.CustomNotification;
+import com.example.groupupv2.interfaces.NotificationInterface;
 import com.example.groupupv2.R;
 
-public class NotificationMaker implements CustomNotification {
+public class NotificationMaker implements NotificationInterface {
     public static String CHANNEL_ID = "Chanel1";
 
 

@@ -1,26 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="7dp">
+   >
 
     <TextView
+        android:id="@+id/post_layoutTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="70dp"
         android:text="Create Post"
-        android:textColor="#111111"
+        android:textColor="@color/darkBlue"
+        android:textSize="33dp"
         android:textStyle="bold"
-        android:textSize="24dp"/>
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/post_title"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Post title"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/blue_layout_rounded_corners"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/post_layoutTitle">
 
-        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="3dp"
+            android:text="Title"
+            android:textColor="#F3F3F3"
+            android:textSize="22dp"
+            android:textStyle="bold" />
 
 
-</LinearLayout>
+        <EditText
+
+
+            android:id="@+id/post_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:height="45dp"
+            android:background="@drawable/white_layout" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="3dp"
+            android:text="Description"
+            android:textColor="#F3F3F3"
+            android:textSize="22dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/post_description"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/white_layout"
+            android:singleLine="false"/>
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/black_layout"
+            android:text="POST"
+            android:textSize="20dp"
+            android:textColor="@color/lightGrey"
+            android:padding="4dp"
+            android:layout_gravity="center_horizontal"
+
+            />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.groupupv2.homepage.homefragments;
+package com.example.groupupv2.presentation.homefragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,11 +9,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.groupupv2.R;
-import com.example.groupupv2.homepage.NavigationDrawerViewModel;
+import com.example.groupupv2.presentation.NavigationDrawerViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,8 +20,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
 
@@ -34,6 +31,7 @@ public class ProfileFragment extends Fragment {
 
     TextView emailTV;
     TextView nameTV;
+    TextView addPost;
 
     @Nullable
     @Override
@@ -47,15 +45,29 @@ public class ProfileFragment extends Fragment {
 
         emailTV = view.findViewById(R.id.profile_email);
         nameTV = view.findViewById(R.id.profile_name);
+        addPost = view.findViewById(R.id.profile_addPostTV);
 
-        viewModel = new ViewModelProvider(requireActivity()).get(NavigationDrawerViewModel.class);
-        viewModel.makeToast(view.getContext());
+        addPost.setOnClickListener(view1 -> {
+            Fragment createPostFragment = new CreatePostFragment();
+            Bundle args = new Bundle();
+            args.putString("CurrentUserID", currentUserUid);
+            createPostFragment.setArguments(args);
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame, createPostFragment);
+            transaction.commit();
+
+
+        });
+
+
+        //viewModel = new ViewModelProvider(requireActivity()).get(NavigationDrawerViewModel.class);
+        //viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(NavigationDrawerViewModel.class);
+        //viewModel.makeToast(view.getContext());
         setNameAndEmail();
         return view;
     }
 
-    private void setNameAndEmail()
-    {
+    private void setNameAndEmail() {
         Thread thread = new Thread(() ->
         {
             if (currentUser != null) {
@@ -78,4 +90,6 @@ public class ProfileFragment extends Fragment {
         thread.start();
 
     }
+
+
 }
