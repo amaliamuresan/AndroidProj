@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout>
-    
-    <data>
-        <variable
-            name="NavigationDrawerViewModel"
-            type="com.example.groupupv2.presentation.NavigationDrawerViewModel"
-            />
-        
-    </data>
 
+    <data>
+
+        <variable
+            name="navigationDrawerViewModel"
+            type="com.example.groupupv2.presentation.NavigationDrawerViewModel" />
+
+    </data>
 
     <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -35,7 +33,6 @@
                 android:theme="?attr/actionBarTheme">
 
             </androidx.appcompat.widget.Toolbar>
-
 
 
             <FrameLayout

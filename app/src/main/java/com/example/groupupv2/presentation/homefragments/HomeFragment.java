@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.groupupv2.domain.Post;
-import com.example.groupupv2.homepage.PostAdapter;
+import com.example.groupupv2.presentation.PostAdapter;
 import com.example.groupupv2.R;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         context = container.getContext();
-        recyclerView = (RecyclerView) view.findViewById(R.id.post_recyclerView);
+        /*recyclerView = (RecyclerView) view.findViewById(R.id.post_recyclerView);
         recyclerView.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(context);
@@ -43,8 +43,7 @@ public class HomeFragment extends Fragment {
         posts.add(new Post("Bonnie", R.drawable.common_full_open_on_phone, "19/01/2020", "Description2", "Domain2"));
         myAdapter = new PostAdapter(context, posts);
         recyclerView.setAdapter(myAdapter);
-
-
+*/
         return view;
     }
 }

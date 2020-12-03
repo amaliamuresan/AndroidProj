@@ -19,8 +19,11 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.groupupv2.R;
+import com.example.groupupv2.data.PostDataSource;
 import com.example.groupupv2.databinding.NavigationViewBinding;
-import com.example.groupupv2.presentation.NavigationDrawerViewModel;
+import com.example.groupupv2.databinding.PostDetailsBinding;
+import com.example.groupupv2.domain.PostRepository;
+import com.example.groupupv2.domain.PostsUseCase;
 import com.example.groupupv2.presentation.homefragments.HomeFragment;
 import com.example.groupupv2.presentation.homefragments.ProfileFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -57,16 +60,18 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        //NavigationDrawerViewModel viewModel = new NavigationDrawerViewModel();
-
             NavigationDrawerViewModel viewModel = (NavigationDrawerViewModel) new ViewModelProvider(this, new ViewModelProvider.Factory() {
             @NonNull
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                return (T) new NavigationDrawerViewModel();
+                PostRepository repository = new PostDataSource();
+                PostsUseCase useCase = new PostsUseCase(repository);
+
+                return (T) new NavigationDrawerViewModel(useCase);
             }
         }).get(NavigationDrawerViewModel.class);
+
+
 
         NavigationViewBinding binding = DataBindingUtil.setContentView(this, R.layout.navigation_view);
         binding.setNavigationDrawerViewModel(viewModel);
