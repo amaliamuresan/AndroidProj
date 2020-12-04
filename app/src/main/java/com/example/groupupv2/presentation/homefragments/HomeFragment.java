@@ -8,42 +8,54 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.groupupv2.data.PostDataSource;
+import com.example.groupupv2.databinding.FragmentHomeBinding;
+import com.example.groupupv2.databinding.NavigationViewBinding;
+import com.example.groupupv2.databinding.PostDetailsBinding;
 import com.example.groupupv2.domain.Post;
+import com.example.groupupv2.domain.PostRepository;
+import com.example.groupupv2.domain.PostsUseCase;
+import com.example.groupupv2.presentation.NavigationDrawerViewModel;
 import com.example.groupupv2.presentation.PostAdapter;
 import com.example.groupupv2.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    RecyclerView recyclerView;
-    RecyclerView.Adapter myAdapter;
-    RecyclerView.LayoutManager layoutManager;
-    Context context;
-
-    ArrayList<Post> posts;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        context = container.getContext();
-        /*recyclerView = (RecyclerView) view.findViewById(R.id.post_recyclerView);
-        recyclerView.setHasFixedSize(true);
 
-        layoutManager = new LinearLayoutManager(context);
-        recyclerView.setLayoutManager(layoutManager);
 
-        posts = new ArrayList<>();
-        posts.add(new Post("Johnny", R.drawable.common_full_open_on_phone, "19/09/2020", "Description1", "Domain1"));
-        posts.add(new Post("Bonnie", R.drawable.common_full_open_on_phone, "19/01/2020", "Description2", "Domain2"));
-        myAdapter = new PostAdapter(context, posts);
-        recyclerView.setAdapter(myAdapter);
-*/
+        HomeFragmentViewModel viewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
+            @NonNull
+            @Override
+            public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+                PostRepository repository = new PostDataSource();
+                PostsUseCase useCase = new PostsUseCase(repository);
+
+                return (T) new HomeFragmentViewModel(useCase);
+            }
+        }).get(HomeFragmentViewModel.class);
+
+        FragmentHomeBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
+
+        View view = binding.getRoot();
+
+        binding.setHomeFragmentViewModel(viewModel);
+
+        viewModel.addPosts();
+
         return view;
     }
 }

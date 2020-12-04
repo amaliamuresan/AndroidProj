@@ -13,13 +13,12 @@ public class MainBindingAdapter {
     @BindingAdapter("post")
     public static void setPosts(RecyclerView recyclerView, List<Post> posts) {
         RecyclerView.Adapter<?> adapter = recyclerView.getAdapter();
-        if(adapter != null)
-        {
+        if (adapter == null) {
             adapter = new PostAdapter();
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         }
-        if(posts != null)
+        if (posts != null)
             ((PostAdapter) adapter).updatePosts(posts);
     }
 

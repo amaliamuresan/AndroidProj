@@ -4,8 +4,9 @@
     <data>
 
         <variable
-            name="customViewModel"
-            type="com.example.groupupv2.presentation.NavigationDrawerViewModel" />
+            name="homeFragmentViewModel"
+            type="com.example.groupupv2.presentation.homefragments.HomeFragmentViewModel" />
+
 
     </data>
 
@@ -20,8 +21,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/post_recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:post="@{customViewModel.posts}"
+            android:layout_height="match_parent"
+            app:post="@{homeFragmentViewModel.posts}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="1dp"

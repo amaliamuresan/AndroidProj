@@ -67,7 +67,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
                 PostRepository repository = new PostDataSource();
                 PostsUseCase useCase = new PostsUseCase(repository);
 
-                return (T) new NavigationDrawerViewModel(useCase);
+                return (T) new NavigationDrawerViewModel();
             }
         }).get(NavigationDrawerViewModel.class);
 

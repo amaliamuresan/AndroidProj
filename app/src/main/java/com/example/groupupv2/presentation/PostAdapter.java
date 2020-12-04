@@ -18,16 +18,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     private final List<Post> posts;
 
-    public PostAdapter()
-    {
+    public PostAdapter() {
         posts = new ArrayList<>();
     }
 
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-          PostDetailsBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-                  R.layout.post_details, parent, false);
+        PostDetailsBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
+                R.layout.post_details, parent, false);
 
         return new PostViewHolder(binding);
     }

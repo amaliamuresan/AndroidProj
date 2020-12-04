@@ -10,16 +10,8 @@ import com.example.groupupv2.domain.Post;
 import com.example.groupupv2.domain.PostsUseCase;
 
 public class NavigationDrawerViewModel extends ViewModel {
-    public ObservableArrayList<Post> posts = new ObservableArrayList<>();
 
-    private final PostsUseCase postsUseCase;
-
-    public NavigationDrawerViewModel(PostsUseCase postsUseCase) {
-        this.postsUseCase = postsUseCase;
-    }
-
-    public void makeToast(Context context)
-    {
+    public void makeToast(Context context) {
         Toast.makeText(context,  "Toast from view model", Toast.LENGTH_SHORT).show();
     }
 
