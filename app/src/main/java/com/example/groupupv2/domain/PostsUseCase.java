@@ -26,7 +26,7 @@ public class PostsUseCase {
             }
             return posts;
         } catch (Exception e) {
-            Log.d("PoatUseCase", "Error " + e.getMessage());
+            Log.d("PostUseCase", "Error " + e.getMessage());
             return Collections.emptyList();
         }
 

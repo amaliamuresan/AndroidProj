@@ -11,6 +11,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.Observable;
+import androidx.databinding.ObservableField;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -24,6 +26,7 @@ import com.example.groupupv2.databinding.NavigationViewBinding;
 import com.example.groupupv2.databinding.PostDetailsBinding;
 import com.example.groupupv2.domain.PostRepository;
 import com.example.groupupv2.domain.PostsUseCase;
+import com.example.groupupv2.homepage.User;
 import com.example.groupupv2.presentation.homefragments.HomeFragment;
 import com.example.groupupv2.presentation.homefragments.ProfileFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -46,21 +49,13 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
     TextView emailTV;
     View headerView;
 
-    private FirebaseAuth mAuth;
-
-    private FirebaseUser currentUser;
-    private DatabaseReference mDatabase;
-    private String currentUserUid;
-
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
-
+    NavigationDrawerViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-            NavigationDrawerViewModel viewModel = (NavigationDrawerViewModel) new ViewModelProvider(this, new ViewModelProvider.Factory() {
+        viewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
             @NonNull
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
@@ -72,16 +67,10 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         }).get(NavigationDrawerViewModel.class);
 
 
-
         NavigationViewBinding binding = DataBindingUtil.setContentView(this, R.layout.navigation_view);
         binding.setNavigationDrawerViewModel(viewModel);
 
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
-        if (currentUser != null)
-            currentUserUid = currentUser.getUid();
         nav_view = findViewById(R.id.menu_allMenu);
         nav_view.setNavigationItemSelectedListener(this);
 
@@ -96,39 +85,18 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         nameTV = headerView.findViewById(R.id.menu_nameTV);
         emailTV = headerView.findViewById(R.id.menu_emailTV);
 
-        setHeaderNameAndEmail();
+        viewModel.setHeaderNameAndEmail(emailTV, nameTV);
 
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.frame, new HomeFragment());
-        fragmentTransaction.commit();
+        viewModel.setDefaultFragment(this);
 
     }
 
-    private void setHeaderNameAndEmail() {
-        if (currentUser != null) {
-            emailTV.setText(currentUser.getEmail());
-
-            mDatabase.child(currentUserUid).child("name").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String name = dataSnapshot.getValue(String.class);
-                    nameTV.setText(name);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        }
-    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.menu_home) {
             try {
-                setFragment(HomeFragment.class);
+                viewModel.setFragment(HomeFragment.class, this);
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
@@ -137,7 +105,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         }
         if (menuItem.getItemId() == R.id.menu_profile) {
             try {
-                setFragment(ProfileFragment.class);
+                viewModel.setFragment(ProfileFragment.class, this);
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
@@ -146,14 +114,6 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         }
 
         return true;
-    }
-
-    public <T> void setFragment(Class<T> classType) throws InstantiationException, IllegalAccessException {
-        T fragment = classType.newInstance();
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.frame, (Fragment) fragment);
-        fragmentTransaction.commit();
     }
 
 }
