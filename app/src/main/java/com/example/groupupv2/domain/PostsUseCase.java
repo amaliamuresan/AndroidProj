@@ -9,6 +9,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import timber.log.Timber;
+
 public class PostsUseCase {
     private final PostRepository repository;
 
@@ -18,7 +20,7 @@ public class PostsUseCase {
 
     public List<Post> execute() {
         try {
-            Log.d("PostUseCase", "Execute() called");
+            Timber.d("Execute() called");
 
             ArrayList<Post> posts = new ArrayList<>();
             for (PostDto dto : repository.getItems()) {
@@ -26,7 +28,7 @@ public class PostsUseCase {
             }
             return posts;
         } catch (Exception e) {
-            Log.d("PostUseCase", "Error " + e.getMessage());
+            Timber.d("Error %s", e.getMessage());
             return Collections.emptyList();
         }
 

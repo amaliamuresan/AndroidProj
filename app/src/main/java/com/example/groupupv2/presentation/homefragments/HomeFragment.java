@@ -1,6 +1,5 @@
 package com.example.groupupv2.presentation.homefragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,22 +11,13 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.groupupv2.data.PostDataSource;
+import com.example.groupupv2.data.remote.PostDataSource;
+import com.example.groupupv2.data.remote.PostsAPI;
 import com.example.groupupv2.databinding.FragmentHomeBinding;
-import com.example.groupupv2.databinding.NavigationViewBinding;
-import com.example.groupupv2.databinding.PostDetailsBinding;
-import com.example.groupupv2.domain.Post;
 import com.example.groupupv2.domain.PostRepository;
 import com.example.groupupv2.domain.PostsUseCase;
-import com.example.groupupv2.presentation.NavigationDrawerViewModel;
-import com.example.groupupv2.presentation.PostAdapter;
 import com.example.groupupv2.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -41,7 +31,7 @@ public class HomeFragment extends Fragment {
             @NonNull
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                PostRepository repository = new PostDataSource();
+                PostRepository repository = new PostDataSource(PostsAPI.createApi());
                 PostsUseCase useCase = new PostsUseCase(repository);
 
                 return (T) new HomeFragmentViewModel(useCase);

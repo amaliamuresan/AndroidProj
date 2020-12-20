@@ -10,6 +10,8 @@ import com.example.groupupv2.domain.PostsUseCase;
 
 import java.util.List;
 
+import timber.log.Timber;
+
 public class HomeFragmentViewModel extends ViewModel {
     public ObservableArrayList<Post> posts = new ObservableArrayList<>();
 
@@ -20,7 +22,7 @@ public class HomeFragmentViewModel extends ViewModel {
     }
 
     public void addPosts() {
-        Log.i("HomeFragmentViewModel", "addPosts() called");
+        Timber.i("addPosts() called");
         List<Post> posts = postsUseCase.execute();
         this.posts.addAll(posts);
     }
