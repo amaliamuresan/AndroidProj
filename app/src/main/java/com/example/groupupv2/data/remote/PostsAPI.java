@@ -13,9 +13,9 @@ import retrofit2.http.GET;
 
 public interface PostsAPI {
 
-    String BASE_URL = "https://group-up-822d1.firebaseio.com";
+    String BASE_URL = "https://group-up-822d1.firebaseio.com/";
 
-    @GET("users.json")
+    @GET("posts.json")
     Call<List<PostDto>> getItems();
 
     static PostsAPI createApi() {

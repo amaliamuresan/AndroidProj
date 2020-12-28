@@ -19,6 +19,7 @@ import com.example.groupupv2.R;
 import com.example.groupupv2.data.remote.PostDataSource;
 import com.example.groupupv2.data.remote.PostsAPI;
 import com.example.groupupv2.databinding.NavigationViewBinding;
+import com.example.groupupv2.domain.PostMediator;
 import com.example.groupupv2.domain.PostRepository;
 import com.example.groupupv2.domain.PostsUseCase;
 import com.example.groupupv2.presentation.homefragments.HomeFragment;
@@ -49,7 +50,8 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
                 PostRepository repository = new PostDataSource(PostsAPI.createApi());
-                PostsUseCase useCase = new PostsUseCase(repository);
+                PostMediator postMediator = new PostMediator(repository);
+                PostsUseCase useCase = new PostsUseCase(postMediator);
 
                 return (T) new NavigationDrawerViewModel();
             }

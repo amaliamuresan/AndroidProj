@@ -2,6 +2,8 @@ package com.example.groupupv2.domain;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.groupupv2.data.PostDto;
 
 import java.util.ArrayList;
@@ -12,25 +14,14 @@ import java.util.List;
 import timber.log.Timber;
 
 public class PostsUseCase {
-    private final PostRepository repository;
+    private final PostMediator mediator;
 
-    public PostsUseCase(PostRepository repository) {
-        this.repository = repository;
+    public PostsUseCase(PostMediator mediator) {
+        this.mediator = mediator;
     }
 
-    public List<Post> execute() {
-        try {
-            Timber.d("Execute() called");
-
-            ArrayList<Post> posts = new ArrayList<>();
-            for (PostDto dto : repository.getItems()) {
-                posts.add(new Post(dto.getAutorID(), dto.getImage(), dto.getData(), dto.getDescription(), dto.getDomain()));
-            }
-            return posts;
-        } catch (Exception e) {
-            Timber.d("Error %s", e.getMessage());
-            return Collections.emptyList();
-        }
-
+    public LiveData<List<Post>> execute() {
+        return mediator.getItems();
     }
+
 }

@@ -9,12 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.groupupv2.data.remote.PostDataSource;
 import com.example.groupupv2.data.remote.PostsAPI;
 import com.example.groupupv2.databinding.FragmentHomeBinding;
+import com.example.groupupv2.domain.PostMediator;
 import com.example.groupupv2.domain.PostRepository;
 import com.example.groupupv2.domain.PostsUseCase;
 import com.example.groupupv2.R;
@@ -32,7 +34,8 @@ public class HomeFragment extends Fragment {
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
                 PostRepository repository = new PostDataSource(PostsAPI.createApi());
-                PostsUseCase useCase = new PostsUseCase(repository);
+                PostMediator postMediator = new PostMediator(repository);
+                PostsUseCase useCase = new PostsUseCase(postMediator);
 
                 return (T) new HomeFragmentViewModel(useCase);
             }
@@ -45,6 +48,7 @@ public class HomeFragment extends Fragment {
         binding.setHomeFragmentViewModel(viewModel);
 
         viewModel.addPosts();
+
 
         return view;
     }

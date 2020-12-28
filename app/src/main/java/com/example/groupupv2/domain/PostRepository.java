@@ -6,5 +6,5 @@ import java.io.IOException;
 import java.util.List;
 
 public interface PostRepository {
-    List<PostDto> getItems() throws IOException;
+    List<PostDto> getItems();
 }

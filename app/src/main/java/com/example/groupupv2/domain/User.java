@@ -1,4 +1,4 @@
-package com.example.groupupv2.homepage;
+package com.example.groupupv2.domain;
 
 import com.example.groupupv2.domain.Post;
 

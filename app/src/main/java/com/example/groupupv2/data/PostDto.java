@@ -1,9 +1,14 @@
 package com.example.groupupv2.data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PostDto {
     private final String autorID;
     private final int image;
+
+    @SerializedName("timestamp")
     private final String data;
+
     private final String description;
     private final String domain;
 

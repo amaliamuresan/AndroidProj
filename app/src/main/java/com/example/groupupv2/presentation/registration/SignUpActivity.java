@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.groupupv2.presentation.NavigationDrawerActivity;
-import com.example.groupupv2.homepage.User;
+import com.example.groupupv2.domain.User;
 import com.example.groupupv2.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
