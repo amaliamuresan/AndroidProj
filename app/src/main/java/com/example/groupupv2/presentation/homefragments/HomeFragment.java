@@ -13,9 +13,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.groupupv2.data.PostDto;
 import com.example.groupupv2.data.remote.PostDataSource;
 import com.example.groupupv2.data.remote.PostsAPI;
 import com.example.groupupv2.databinding.FragmentHomeBinding;
+import com.example.groupupv2.domain.Post;
 import com.example.groupupv2.domain.PostMediator;
 import com.example.groupupv2.domain.PostRepository;
 import com.example.groupupv2.domain.PostsUseCase;
@@ -48,6 +50,7 @@ public class HomeFragment extends Fragment {
         binding.setHomeFragmentViewModel(viewModel);
 
         viewModel.addPosts();
+        //viewModel.addPost(new PostDto("323", 2323, "19298734333", "Another description", "domaine1"));
 
 
         return view;

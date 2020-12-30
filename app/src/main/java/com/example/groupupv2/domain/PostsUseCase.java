@@ -23,5 +23,8 @@ public class PostsUseCase {
     public LiveData<List<Post>> execute() {
         return mediator.getItems();
     }
-
+    public void postItem(PostDto post) {
+        mediator.postItem(post);
+    }
+    public int getLastItem(){return mediator.getLastItem();}
 }

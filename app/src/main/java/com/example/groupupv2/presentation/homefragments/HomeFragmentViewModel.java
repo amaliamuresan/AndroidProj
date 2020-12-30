@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.groupupv2.data.PostDto;
 import com.example.groupupv2.domain.Post;
 import com.example.groupupv2.domain.PostsUseCase;
 
@@ -28,6 +29,11 @@ public class HomeFragmentViewModel extends ViewModel {
         LiveData<List<Post>> liveData = postsUseCase.execute();
         liveData.observeForever(items -> this.posts.addAll(items));
         navigationLiveData.setValue(HomeFragment.class);
+    }
+
+    public void addPost(PostDto post)
+    {
+        postsUseCase.postItem(post);
     }
 
 
