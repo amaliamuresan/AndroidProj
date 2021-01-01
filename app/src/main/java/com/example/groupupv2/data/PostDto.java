@@ -3,14 +3,45 @@ package com.example.groupupv2.data;
 import com.google.gson.annotations.SerializedName;
 
 public class PostDto {
-    private final String authorName;
-    private final int image;
+    private String authorName;
+    private int image;
+    private String timestamp;
+    private int id;
+    private String description;
+    private String domain;
+    private String title;
 
-    @SerializedName("timestamp")
-    private final String data;
-    private final int id;
-    private final String description;
-    private final String domain;
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
 
     public int getId() {
         return id;
@@ -19,19 +50,27 @@ public class PostDto {
     public PostDto() {
         this.authorName = "";
         this.image = 0;
-        this.data = "";
+        this.timestamp = "";
         this.description = "";
         this.domain = "";
         this.id = 0;
     }
 
-    public PostDto(String authorName, int image, String data, String description, String domain, int id1) {
+    public PostDto(String authorName, int image, String data, String description, String domain, int id1, String title) {
         this.authorName = authorName;
         this.image = image;
-        this.data = data;
+        this.timestamp = data;
         this.description = description;
         this.domain = domain;
         this.id = id1;
+        this.title = title;
+    }
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
     }
 
     public String getAutorID() {
@@ -43,7 +82,7 @@ public class PostDto {
     }
 
     public String getData() {
-        return data;
+        return timestamp;
     }
 
     public String getDescription() {

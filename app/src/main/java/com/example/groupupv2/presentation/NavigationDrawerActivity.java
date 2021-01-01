@@ -22,6 +22,7 @@ import com.example.groupupv2.databinding.NavigationViewBinding;
 import com.example.groupupv2.domain.PostMediator;
 import com.example.groupupv2.domain.PostRepository;
 import com.example.groupupv2.domain.PostsUseCase;
+import com.example.groupupv2.domain.UserDetails;
 import com.example.groupupv2.presentation.homefragments.HomeFragment;
 import com.example.groupupv2.presentation.homefragments.ProfileFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -78,7 +79,11 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
 
         viewModel.setHeaderNameAndEmail(emailTV, nameTV);
 
+        UserDetails usr = new UserDetails();
+        usr.getUserDetails();
         viewModel.setDefaultFragment(this);
+
+
 
     }
 

@@ -26,10 +26,15 @@ import com.example.groupupv2.databinding.FragmentHomeBinding;
 import com.example.groupupv2.domain.PostMediator;
 import com.example.groupupv2.domain.PostRepository;
 import com.example.groupupv2.domain.PostsUseCase;
+import com.example.groupupv2.domain.UserDetails;
 import com.example.groupupv2.presentation.NavigationDrawerViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
@@ -55,7 +60,7 @@ public class CreatePostFragment extends Fragment {
                 PostMediator postMediator = new PostMediator(repository);
                 PostsUseCase useCase = new PostsUseCase(postMediator);
 
-                return  (T) new CreatePostViewModel(useCase);
+                return (T) new CreatePostViewModel(useCase);
             }
         }).get(CreatePostViewModel.class);
         FragmentCreatePostBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_create_post, container, false);
@@ -75,20 +80,22 @@ public class CreatePostFragment extends Fragment {
 
             if (!viewModel.emptyFields(titleET, descriptionET)) {
                 viewModel.postItem(new PostDto(
-                        viewModel.getAuthorID(),
+                        UserDetails.getCurrentUserUid(),
                         133123,
                         viewModel.getCurrentTime(),
                         descriptionET.getText().toString(),
                         "Domain",
-                        (useCase.getLastItem() + 1)));
+                        0,
+                        titleET.getText().toString()));
             }
 
 
         });
 
         return view;
-
     }
+
+
 
 
 }

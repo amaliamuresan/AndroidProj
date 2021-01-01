@@ -1,25 +1,28 @@
 package com.example.groupupv2.data.remote;
 
-import android.util.Log;
+import androidx.annotation.NonNull;
 
-import com.example.groupupv2.data.ListDtos;
 import com.example.groupupv2.data.PostDto;
-import com.example.groupupv2.domain.Post;
 import com.example.groupupv2.domain.PostRepository;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.io.IOException;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import okhttp3.RequestBody;
-import retrofit2.Response;
 import timber.log.Timber;
 
 public class PostDataSource implements PostRepository {
     private final PostsAPI api;
-    Response<ListDtos> response = null;
+    static List<PostDto> dtoList = new ArrayList<>();
 
+    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference ref = database.child("posts");
 
 
     public PostDataSource(PostsAPI api) {
@@ -27,7 +30,7 @@ public class PostDataSource implements PostRepository {
     }
 
 
-    @Override
+    /*@Override
     public ListDtos getItems() {
         Timber.d("getItem() called");
         try {
@@ -37,6 +40,29 @@ public class PostDataSource implements PostRepository {
             Timber.tag("PostDataSource").w("getItems failed");
             return null;
         }
+    }*/
+
+    public List<PostDto> getItems() {
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
+                dtoList = new ArrayList<>();
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    PostDto post = ds.getValue(PostDto.class);
+                    System.out.println(post.getDescription());
+                    dtoList.add(post);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Timber.w("Get posts failed");
+            }
+        });
+
+        System.out.println(dtoList.toString() + " 2");
+        return dtoList;
     }
 
     @Override
@@ -47,23 +73,5 @@ public class PostDataSource implements PostRepository {
         } catch (Exception e) {
             Timber.w("PostItem(Post post) failed");
         }
-    }
-
-    @Override
-    public int getLastItem() {
-        /*PostDto postDto = new PostDto();
-        Timber.d("getItem() called");
-        try {
-            response = api.getLastItem().execute();
-            List<PostDto> list = response.body();
-            postDto = list.get(list.size() - 1);
-            Timber.d(Integer.toString(postDto.getId()));
-            return postDto.getId();
-        } catch (IOException e) {
-            Timber.tag("PostDataSource").w("getItems failed");
-            return 5;
-        }
-*/
-        return 0;
     }
 }

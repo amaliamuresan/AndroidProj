@@ -26,5 +26,5 @@ public class PostsUseCase {
     public void postItem(PostDto post) {
         mediator.postItem(post);
     }
-    public int getLastItem(){return mediator.getLastItem();}
+
 }

@@ -31,10 +31,7 @@ public class HomeFragmentViewModel extends ViewModel {
         navigationLiveData.setValue(HomeFragment.class);
     }
 
-    public void addPost(PostDto post)
-    {
-        postsUseCase.postItem(post);
-    }
+
 
 
 

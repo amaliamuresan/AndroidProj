@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -30,12 +31,12 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
+        PostRepository repository = new PostDataSource(PostsAPI.createApi());
         HomeFragmentViewModel viewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
             @NonNull
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                PostRepository repository = new PostDataSource(PostsAPI.createApi());
+
                 PostMediator postMediator = new PostMediator(repository);
                 PostsUseCase useCase = new PostsUseCase(postMediator);
 
@@ -55,4 +56,8 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
+
+
+
 }
