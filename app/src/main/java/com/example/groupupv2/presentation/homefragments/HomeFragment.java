@@ -24,6 +24,8 @@ import com.example.groupupv2.domain.PostRepository;
 import com.example.groupupv2.domain.PostsUseCase;
 import com.example.groupupv2.R;
 
+import timber.log.Timber;
+
 public class HomeFragment extends Fragment {
 
 
@@ -49,9 +51,9 @@ public class HomeFragment extends Fragment {
         View view = binding.getRoot();
 
         binding.setHomeFragmentViewModel(viewModel);
-
+        System.out.println("HomeFragment called");
+        Timber.i("Home frg called");
         viewModel.addPosts();
-        //viewModel.addPost(new PostDto("323", 2323, "19298734333", "Another description", "domaine1"));
 
 
         return view;

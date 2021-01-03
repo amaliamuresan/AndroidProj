@@ -19,7 +19,8 @@ import timber.log.Timber;
 
 public class PostDataSource implements PostRepository {
     private final PostsAPI api;
-    static List<PostDto> dtoList = new ArrayList<>();
+    List<PostDto> dtoList = new ArrayList<>();
+
 
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
     DatabaseReference ref = database.child("posts");
@@ -30,29 +31,19 @@ public class PostDataSource implements PostRepository {
     }
 
 
-    /*@Override
-    public ListDtos getItems() {
-        Timber.d("getItem() called");
-        try {
-            response = api.getItems().execute();
-            return response.body();
-        } catch (IOException e) {
-            Timber.tag("PostDataSource").w("getItems failed");
-            return null;
-        }
-    }*/
+    public List<PostDto> getItems(ICallBack iCallBack) {
 
-    public List<PostDto> getItems() {
-
+        List<PostDto> list = new ArrayList<>();
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
                 dtoList = new ArrayList<>();
-                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     PostDto post = ds.getValue(PostDto.class);
-                    System.out.println(post.getDescription());
-                    dtoList.add(post);
+                    System.out.println(post.getDescription() + "Description");
+                    list.add(post);
                 }
+                iCallBack.onCallBack(list);
             }
 
             @Override
@@ -60,16 +51,18 @@ public class PostDataSource implements PostRepository {
                 Timber.w("Get posts failed");
             }
         });
+        return list;
 
-        System.out.println(dtoList.toString() + " 2");
-        return dtoList;
+    }
+
+    public interface ICallBack {
+        void onCallBack(List<PostDto> items);
     }
 
     @Override
     public void postItem(PostDto post) {
         try {
             api.postItem(post).execute();
-            //api.postItem(3, post).execute();
         } catch (Exception e) {
             Timber.w("PostItem(Post post) failed");
         }

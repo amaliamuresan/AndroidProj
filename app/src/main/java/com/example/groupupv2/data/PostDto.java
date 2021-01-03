@@ -1,12 +1,10 @@
 package com.example.groupupv2.data;
 
-import com.google.gson.annotations.SerializedName;
-
 public class PostDto {
     private String authorName;
     private int image;
     private String timestamp;
-    private int id;
+    private String authorID;
     private String description;
     private String domain;
     private String title;
@@ -31,8 +29,8 @@ public class PostDto {
         this.timestamp = timestamp;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(String id) {
+        this.authorID = id;
     }
 
     public void setDescription(String description) {
@@ -43,8 +41,8 @@ public class PostDto {
         this.domain = domain;
     }
 
-    public int getId() {
-        return id;
+    public String getId() {
+        return authorID;
     }
 
     public PostDto() {
@@ -53,18 +51,19 @@ public class PostDto {
         this.timestamp = "";
         this.description = "";
         this.domain = "";
-        this.id = 0;
+        this.authorID = "";
     }
 
-    public PostDto(String authorName, int image, String data, String description, String domain, int id1, String title) {
+    public PostDto(String authorName, int image, String data, String description, String domain, String id1, String title) {
         this.authorName = authorName;
         this.image = image;
         this.timestamp = data;
         this.description = description;
         this.domain = domain;
-        this.id = id1;
+        this.authorID = id1;
         this.title = title;
     }
+
     public String getAuthorName() {
         return authorName;
     }

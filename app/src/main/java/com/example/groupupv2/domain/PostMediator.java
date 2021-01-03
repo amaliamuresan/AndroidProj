@@ -28,6 +28,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import timber.log.Timber;
 
@@ -47,30 +48,31 @@ public class PostMediator {
         ArrayList<Post> list = new ArrayList<>();
 
         executorService.execute(() -> {
-            if(remoteRepository.getItems().size() == 0)
-                remoteRepository.getItems();
-            for (PostDto dto : remoteRepository.getItems()) {
-                if(dto != null)
+            remoteRepository.getItems(items -> {
+
+                System.out.println("list from PostMediator" + items.toString());
+                for (PostDto dto : items) {
+
                     list.add(new Post(
                             dto.getAuthorName(),
                             dto.getImage(),
                             timestampToDate(dto.getData()),
                             dto.getDescription(),
                             dto.getDomain(),
-                            dto.getTitle())
-                            );
-            }
-            this.mutableLiveData.postValue(list);
+                            dto.getTitle()));
+                }
+                this.mutableLiveData.postValue(list);
+            });
+            System.out.println("Final list" + list.toString());
         });
+
         return mutableLiveData;
 
     }
 
-    public void postItem(PostDto post)
-    {
+    public void postItem(PostDto post) {
         executorService.execute(() -> remoteRepository.postItem(post));
     }
-
 
 
     public static String timestampToDate(String postDate) {
@@ -80,27 +82,5 @@ public class PostMediator {
         df.format(Instant.ofEpochMilli(Long.parseLong(postDate)));
 
         return timestamp.toInstant().atZone(zoneId).toLocalDateTime().format(df);
-    }
-
-    public String getPostAuthName(String child)
-    {
-        final String[] name = new String[2];
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        String currentUserUid = currentUser.getUid();
-
-        mDatabase.child(currentUserUid).child(child).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                name[0] = dataSnapshot.getValue(String.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        return name[0];
     }
 }

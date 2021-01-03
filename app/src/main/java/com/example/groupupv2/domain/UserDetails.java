@@ -53,14 +53,11 @@ public class UserDetails {
         });
     }
 
-    public void setCurrentUserUid()
-    {
+    public void setCurrentUserUid() {
         currentUserUid = currentUser.getUid();
     }
 
-
-    public void getUserDetails()
-    {
+    public void getUserDetails() {
         setUName();
         setCurrentUserUid();
     }

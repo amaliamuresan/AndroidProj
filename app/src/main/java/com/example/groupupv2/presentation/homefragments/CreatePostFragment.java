@@ -80,12 +80,12 @@ public class CreatePostFragment extends Fragment {
 
             if (!viewModel.emptyFields(titleET, descriptionET)) {
                 viewModel.postItem(new PostDto(
-                        UserDetails.getCurrentUserUid(),
+                        UserDetails.getName(),
                         133123,
                         viewModel.getCurrentTime(),
                         descriptionET.getText().toString(),
                         "Domain",
-                        0,
+                        UserDetails.getCurrentUserUid(),
                         titleET.getText().toString()));
             }
 
