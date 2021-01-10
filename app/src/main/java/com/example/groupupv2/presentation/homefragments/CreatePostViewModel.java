@@ -34,18 +34,6 @@ public class CreatePostViewModel extends ViewModel {
 
     }
 
-    public String getAuthorID() {
-        FirebaseUser currentUser;
-        String currentUserUid = "None";
-        FirebaseAuth mAuth;
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
-        if (currentUser != null)
-            currentUserUid = currentUser.getDisplayName();
-
-        return currentUserUid;
-    }
-
     public String getCurrentTime() {
         Date date = new Date();
         long ret = date.getTime();

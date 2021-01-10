@@ -41,6 +41,8 @@ import org.w3c.dom.Text;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import timber.log.Timber;
+
 public class CreatePostFragment extends Fragment {
 
     EditText titleET;
@@ -77,7 +79,7 @@ public class CreatePostFragment extends Fragment {
         PostsUseCase useCase = new PostsUseCase(postMediator);
 
         postBtn.setOnClickListener(view1 -> {
-
+            Timber.i("Creating new post");
             if (!viewModel.emptyFields(titleET, descriptionET)) {
                 viewModel.postItem(new PostDto(
                         UserDetails.getName(),

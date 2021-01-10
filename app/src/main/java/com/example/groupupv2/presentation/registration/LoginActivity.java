@@ -16,6 +16,8 @@ import com.example.groupupv2.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 
+import timber.log.Timber;
+
 public class LoginActivity extends AppCompatActivity {
 
     EditText passwordET;
@@ -45,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
 
            loginUser(email, password);
 
-           Log.i("Login", "Login button pressed");
+            Timber.i("Login button pressed");
 
         });
 

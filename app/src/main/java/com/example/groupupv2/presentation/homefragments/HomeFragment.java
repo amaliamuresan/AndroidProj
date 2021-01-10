@@ -51,8 +51,6 @@ public class HomeFragment extends Fragment {
         View view = binding.getRoot();
 
         binding.setHomeFragmentViewModel(viewModel);
-        System.out.println("HomeFragment called");
-        Timber.i("Home frg called");
         viewModel.addPosts();
 
 

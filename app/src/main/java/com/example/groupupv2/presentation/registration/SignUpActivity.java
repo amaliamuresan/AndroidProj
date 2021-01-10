@@ -21,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import timber.log.Timber;
+
 public class SignUpActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
@@ -60,7 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         signUpBtn.setOnClickListener(view -> {
-            Log.i("SignUp", "SignUp button pressed");
+            Timber.i("SignUp button pressed");
             final String email = emailET.getText().toString();
             final String name = nameET.getText().toString();
             final String username = usernameET.getText().toString();
