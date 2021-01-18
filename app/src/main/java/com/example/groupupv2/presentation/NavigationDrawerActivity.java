@@ -1,5 +1,8 @@
 package com.example.groupupv2.presentation;
 
+import android.app.NotificationManager;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -83,8 +86,10 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         usr.getUserDetails();
         viewModel.setDefaultFragment(this);
 
-
-
+        //NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        //notificationManager.notify(NotificationMaker.NOTIFICATION_ID, NotificationMaker.createNotification(this, "Title", "Description"));
+        Intent serviceIntent = new Intent(this, NotificationService.class);
+        startService(serviceIntent);
     }
 
 

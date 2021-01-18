@@ -15,7 +15,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Welcome"
+        android:text="@string/welcome"
         android:textColor="@color/lightBlue"
         android:textSize="22dp"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="20dp"
-        android:text="Sign Up"
+        android:text="@string/sign_up"
         android:textColor="#FFFFFF"
         android:textSize="33dp"
         android:textStyle="bold"
@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_baseline_mail_24"
                     android:drawablePadding="10dp"
-                    android:hint="Email"
+                    android:hint="@string/email"
                     android:textCursorDrawable="@drawable/cursor_style"
                     android:textSize="16dp"
                     android:textStyle="bold"
@@ -113,7 +113,7 @@
                     android:layout_marginTop="12dp"
                     android:drawableLeft="@drawable/person"
                     android:drawablePadding="10dp"
-                    android:hint="Name and surname"
+                    android:hint="@string/name_and_surname"
                     android:textCursorDrawable="@drawable/cursor_style"
 
 
@@ -146,7 +146,7 @@
                     android:layout_marginTop="12dp"
                     android:drawableLeft="@drawable/username"
                     android:drawablePadding="10dp"
-                    android:hint="Username"
+                    android:hint="@string/username"
                     android:textCursorDrawable="@drawable/cursor_style"
                     android:textSize="16dp"
                     android:textStyle="bold">
@@ -201,7 +201,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/round_button_black"
-            android:text="Sign Up"
+            android:text="@string/sign_up"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="16dp"
@@ -231,7 +231,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
-                android:text="OR"
+                android:text="@string/or"
                 android:textColor="#808080"
                 android:textSize="16dp" />
 
@@ -286,7 +286,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="3dp"
-                android:text="Have an account?"
+                android:text="@string/have_an_account"
                 android:textColor="#808080"
                 android:textSize="18dp" />
 
@@ -294,7 +294,7 @@
                 android:id="@+id/Main_LoginTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Log In"
+                android:text="@string/log_in"
                 android:textColor="@color/darkBlue"
                 android:textSize="18dp"
                 android:textStyle="bold" />

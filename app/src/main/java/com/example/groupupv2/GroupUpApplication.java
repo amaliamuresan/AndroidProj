@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.facebook.stetho.Stetho;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.database.annotations.NotNull;
 
 import timber.log.Timber;

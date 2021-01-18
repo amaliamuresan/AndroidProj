@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.groupupv2.presentation.NotificationMaker;
-import com.example.groupupv2.interfaces.NotificationInterface;
 import com.example.groupupv2.R;
 
 import timber.log.Timber;
@@ -15,7 +14,7 @@ import timber.log.Timber;
 public class SplashScreen extends AppCompatActivity {
 
     final private int SPLASH_SCREEN_TIME = 2000;
-    NotificationInterface channelMaker = new NotificationMaker();
+    NotificationMaker channelMaker = new NotificationMaker();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_home">Acasa</string>
+    <string name="menu_gallery">Galerie</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="title">Titlu</string>
+    <string name="password">Parola</string>
+    <string name="log_in">Autentificare</string>
+    <string name="or">SAU</string>
+    <string name="forget_password">Ai uitat parola?</string>
+    <string name="welcome">Bun venit</string>
+    <string name="welcome_back">Bine ai revenit</string>
+    <string name="email">Email</string>
+    <string name="name_and_surname">Nume si prenume</string>
+    <string name="username">Username</string>
+    <string name="sign_up">Inregistrare</string>
+    <string name="have_an_account">Ai deja un cont?</string>
+    <string name="work_better_together">- lucra impreuna mai bine -</string>
+    <string name="create_post">Creaza o postare</string>
+    <string name="description">Descriere</string>
+    <string name="post">Posteaza</string>
+    <string name="home">Acasa</string>
+    <string name="profile">Profil</string>
+    <string name="messages">Mesaje</string>
+    <string name="settings">Setari</string>
+    <string name="log_out">Delogare</string>
+    <string name="action_settings">Setari</string>
+</resources>
