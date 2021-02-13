@@ -5,31 +5,29 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.groupupv2.presentation.NavigationDrawerActivity;
 import com.example.groupupv2.presentation.NotificationMaker;
-import com.example.groupupv2.interfaces.NotificationInterface;
 import com.example.groupupv2.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
+
+import timber.log.Timber;
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText passwordET;
     EditText emailET;
     Button loginBtn;
-    NotificationInterface notificationMaker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        notificationMaker = new NotificationMaker();
-        notificationMaker.createNotification(this, "My notification", "Description Login");
+        NotificationMaker.createNotification(this, "My notification", "Description Login");
 
         passwordET = findViewById(R.id.Login_PasswordET);
         passwordET.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -45,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
            loginUser(email, password);
 
-           Log.i("Login", "Login button pressed");
+            Timber.i("Login button pressed");
 
         });
 

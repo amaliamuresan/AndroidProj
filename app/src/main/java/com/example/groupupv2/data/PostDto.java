@@ -1,22 +1,79 @@
 package com.example.groupupv2.data;
 
 public class PostDto {
-    private final String autorID;
-    private final int image;
-    private final String data;
-    private final String description;
-    private final String domain;
+    private String authorName;
+    private int image;
+    private String timestamp;
+    private String authorID;
+    private String description;
+    private String domain;
+    private String title;
 
-    public PostDto(String autorID, int image, String data, String description, String domain) {
-        this.autorID = autorID;
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public void setImage(int image) {
         this.image = image;
-        this.data = data;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void setId(String id) {
+        this.authorID = id;
+    }
+
+    public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setDomain(String domain) {
         this.domain = domain;
     }
 
+    public String getId() {
+        return authorID;
+    }
+
+    public PostDto() {
+        this.authorName = "";
+        this.image = 0;
+        this.timestamp = "";
+        this.description = "";
+        this.domain = "";
+        this.authorID = "";
+    }
+
+    public PostDto(String authorName, int image, String data, String description, String domain, String id1, String title) {
+        this.authorName = authorName;
+        this.image = image;
+        this.timestamp = data;
+        this.description = description;
+        this.domain = domain;
+        this.authorID = id1;
+        this.title = title;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
     public String getAutorID() {
-        return autorID;
+        return authorName;
     }
 
     public int getImage() {
@@ -24,7 +81,7 @@ public class PostDto {
     }
 
     public String getData() {
-        return data;
+        return timestamp;
     }
 
     public String getDescription() {

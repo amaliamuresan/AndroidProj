@@ -1,4 +1,4 @@
-package com.example.groupupv2.homepage;
+package com.example.groupupv2.domain;
 
 import android.content.Context;
 
@@ -7,7 +7,6 @@ import androidx.work.Data;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import com.example.groupupv2.interfaces.NotificationInterface;
 import com.example.groupupv2.presentation.NotificationMaker;
 
 public class CustomWorker extends Worker {
@@ -22,8 +21,8 @@ public class CustomWorker extends Worker {
         String title = data.getString("title");
         String description = data.getString("description");
 
-        NotificationInterface notification = new NotificationMaker();
-        ((NotificationMaker) notification).createNotification(getApplicationContext(), title, description);
+
+        NotificationMaker.createNotification(getApplicationContext(), title, description);
 
         return Result.success();
     }

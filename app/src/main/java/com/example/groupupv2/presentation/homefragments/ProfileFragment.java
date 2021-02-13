@@ -53,16 +53,12 @@ public class ProfileFragment extends Fragment {
             args.putString("CurrentUserID", currentUserUid);
             createPostFragment.setArguments(args);
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame, createPostFragment);
+            transaction.replace(R.id.frame, createPostFragment).addToBackStack("fragment");
             transaction.commit();
 
 
         });
 
-
-        //viewModel = new ViewModelProvider(requireActivity()).get(NavigationDrawerViewModel.class);
-        //viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(NavigationDrawerViewModel.class);
-        //viewModel.makeToast(view.getContext());
         setNameAndEmail();
         return view;
     }

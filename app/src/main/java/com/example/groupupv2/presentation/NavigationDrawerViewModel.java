@@ -1,6 +1,7 @@
 package com.example.groupupv2.presentation;
 
 import android.content.Context;
+import android.os.Build;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,17 +61,23 @@ public class NavigationDrawerViewModel extends ViewModel {
         T fragment = classType.newInstance();
         fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.frame, (Fragment) fragment);
+        fragmentTransaction.add(R.id.frame, (Fragment) fragment).addToBackStack("fragment");
         fragmentTransaction.commit();
+
     }
 
     public void setDefaultFragment(Context context)
     {
-        fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.frame, new HomeFragment());
-        fragmentTransaction.commit();
+       fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+       fragmentTransaction = fragmentManager.beginTransaction();
+       fragmentTransaction.add(R.id.frame, new HomeFragment());
+       fragmentTransaction.commit();
+
     }
+
+
+
+
 
     public void makeToast(Context context) {
         Toast.makeText(context,  "Toast from view model", Toast.LENGTH_SHORT).show();

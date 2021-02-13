@@ -6,13 +6,23 @@ public class Post {
     private String data;
     private String description;
     private String domain;
+    private String title;
 
-    public Post(String autorID, int image, String data, String description, String domain) {
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Post(String autorID, int image, String data, String description, String domain, String title) {
         this.autorID = autorID;
         this.image = image;
         this.data = data;
         this.description = description;
         this.domain = domain;
+        this.title = title;
     }
 
     public String getAutorID() {

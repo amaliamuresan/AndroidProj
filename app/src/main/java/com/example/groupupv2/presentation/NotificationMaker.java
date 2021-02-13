@@ -1,5 +1,6 @@
 package com.example.groupupv2.presentation;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,25 +10,29 @@ import android.content.Intent;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.example.groupupv2.interfaces.NotificationInterface;
 import com.example.groupupv2.R;
 
-public class NotificationMaker implements NotificationInterface {
+import java.util.Locale;
+
+public class NotificationMaker {
     public static String CHANNEL_ID = "Chanel1";
+    public static final int NOTIFICATION_ID = 1;
 
 
-    public void createNotification(Context context, String title, String text) {
-        Intent intent = new Intent(context, context.getClass());
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+    public static Notification createNotification(Context context, String title, String text) {
+        //Intent intent = new Intent(context, context.getClass());
+        //PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.add)
                 .setContentTitle(title)
                 .setContentText(text)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pendingIntent)
+                .setCategory(NotificationCompat.CATEGORY_SERVICE)
                 .setAutoCancel(true);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.notify(123, builder.build());
+
+        return builder.build();
     }
 
     public void createChannel(Context context) {

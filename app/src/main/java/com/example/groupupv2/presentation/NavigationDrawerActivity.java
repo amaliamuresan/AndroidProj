@@ -1,5 +1,8 @@
 package com.example.groupupv2.presentation;
 
+import android.app.NotificationManager;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -11,32 +14,23 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.Observable;
-import androidx.databinding.ObservableField;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.groupupv2.R;
-import com.example.groupupv2.data.PostDataSource;
+import com.example.groupupv2.data.remote.PostDataSource;
+import com.example.groupupv2.data.remote.PostsAPI;
 import com.example.groupupv2.databinding.NavigationViewBinding;
-import com.example.groupupv2.databinding.PostDetailsBinding;
+import com.example.groupupv2.domain.PostMediator;
 import com.example.groupupv2.domain.PostRepository;
 import com.example.groupupv2.domain.PostsUseCase;
-import com.example.groupupv2.homepage.User;
+import com.example.groupupv2.domain.UserDetails;
 import com.example.groupupv2.presentation.homefragments.HomeFragment;
 import com.example.groupupv2.presentation.homefragments.ProfileFragment;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
+import timber.log.Timber;
 
 
 public class NavigationDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -59,8 +53,9 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
             @NonNull
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                PostRepository repository = new PostDataSource();
-                PostsUseCase useCase = new PostsUseCase(repository);
+                PostRepository repository = new PostDataSource(PostsAPI.createApi());
+                PostMediator postMediator = new PostMediator(repository);
+                PostsUseCase useCase = new PostsUseCase(postMediator);
 
                 return (T) new NavigationDrawerViewModel();
             }
@@ -87,8 +82,14 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
 
         viewModel.setHeaderNameAndEmail(emailTV, nameTV);
 
+        UserDetails usr = new UserDetails();
+        usr.getUserDetails();
         viewModel.setDefaultFragment(this);
 
+        //NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        //notificationManager.notify(NotificationMaker.NOTIFICATION_ID, NotificationMaker.createNotification(this, "Title", "Description"));
+        Intent serviceIntent = new Intent(this, NotificationService.class);
+        startService(serviceIntent);
     }
 
 
@@ -100,7 +101,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
-                Log.e("Fragment", "Error setting fragment" + HomeFragment.class.getName());
+                Timber.e("Error setting fragment %s", HomeFragment.class.getName());
             }
         }
         if (menuItem.getItemId() == R.id.menu_profile) {
@@ -109,11 +110,13 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
-                Log.e("Fragment", "Error setting fragment" + ProfileFragment.class.getName());
+                Timber.e("Error setting fragment %s", ProfileFragment.class.getName());
             }
         }
 
         return true;
     }
+
+
 
 }
